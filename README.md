@@ -9,12 +9,12 @@
 <br />
 
 <div align="center">
-<img src="https://img.shields.io/github/languages/top/feperonica/blog-pessoal?style=flat-square" />
-<img src="https://img.shields.io/github/repo-size/feperonica/blog-pessoal?style=flat-square" />
-<img src="https://img.shields.io/github/languages/count/feperonica/blog-pessoal?style=flat-square" />
-<img src="https://img.shields.io/github/last-commit/feperonica/blog-pessoal?style=flat-square" />
-<img src="https://img.shields.io/github/issues/feperonica/blog-pessoal?style=flat-square" />
-<img src="https://img.shields.io/github/issues-pr/feperonica/blog-pessoal?style=flat-square" />
+<img src="https://img.shields.io/github/languages/top/feperonica/blogpessoal_spring?style=flat-square" />
+<img src="https://img.shields.io/github/repo-size/feperonica/blogpessoal_spring?style=flat-square" />
+<img src="https://img.shields.io/github/languages/count/feperonica/blogpessoal_spring?style=flat-square" />
+<img src="https://img.shields.io/github/last-commit/feperonica/blogpessoal_spring?style=flat-square" />
+<img src="https://img.shields.io/github/issues/feperonica/blogpessoal_spring?style=flat-square" />
+<img src="https://img.shields.io/github/issues-pr/feperonica/blogpessoal_spring?style=flat-square" />
 <img src="https://img.shields.io/badge/status-construção-yellow" alt="Status: Em Construção" />
 </div>
 
