@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,6 +15,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -27,8 +29,9 @@ public class Usuario {
 	@NotBlank(message = "O Atributo Nome é Obrigatório!")
 	private String nome;
 
-	@NotBlank(message = "O Atributo Usuário é Obrigatório!")
-	@Email(message = "O Atributo Usuário deve ser um email válido!")
+	@Schema(example = "email@email.com.br")
+	@NotNull(message = "O atributo Usuário é Obrigatório!")
+	@Email(message = "O atributo Usuário deve ser um email válido!")
 	private String usuario;
 
 	 @NotBlank(message = "O usuário (e-mail) é obrigatório!")
@@ -38,7 +41,7 @@ public class Usuario {
 	@Size(max = 5000, message = "O link da foto não pode ser maior do que 5000 caracteres")
 	private String foto;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
 

@@ -90,7 +90,13 @@ public class UsuarioService {
         return encoder.encode(senha);
     }
     
+    // Lista Todos
     public List<Usuario> listarTodos() {
         return usuarioRepository.findAll();
+    }
+    
+    // Buscar por ID
+    public Optional<Usuario> buscarPorId(Long id) {
+        return usuarioRepository.findById(id);
     }
 }

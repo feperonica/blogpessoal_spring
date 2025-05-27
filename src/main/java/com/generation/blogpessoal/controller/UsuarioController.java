@@ -49,4 +49,11 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.listarTodos());
     }
     
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id) {
+        return usuarioService.buscarPorId(id)
+                .map(resposta -> ResponseEntity.ok(resposta))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+    
 }
