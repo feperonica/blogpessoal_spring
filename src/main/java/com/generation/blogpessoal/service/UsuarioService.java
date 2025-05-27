@@ -1,5 +1,6 @@
 package com.generation.blogpessoal.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,5 +89,8 @@ public class UsuarioService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.encode(senha);
     }
-
+    
+    public List<Usuario> listarTodos() {
+        return usuarioRepository.findAll();
+    }
 }

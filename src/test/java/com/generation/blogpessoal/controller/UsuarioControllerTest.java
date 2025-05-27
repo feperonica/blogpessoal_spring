@@ -30,7 +30,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.generation.blogpessoal.model.Usuario;
-
+import com.generation.blogpessoal.model.UsuarioLogin;
 import com.generation.blogpessoal.repository.UsuarioRepository;
 
 import com.generation.blogpessoal.service.UsuarioService;
@@ -148,6 +148,51 @@ public class UsuarioControllerTest {
 				assertEquals(HttpStatus.OK, resposta.getStatusCode());
 				assertNotNull(resposta.getBody());
 
+	}
+	
+	@Test
+	@DisplayName("Deve autenticar um usuário com sucesso")
+	public void deveAutenticarUsuario() {
+
+	    // Given (cadastrar um usuário)
+	    usuarioService.cadastrarUsuario(
+	        TestBuilder.criarUsuario(null, "Maria Silva", "maria_silva@email.com", "12345678")
+	    );
+
+	    // When (realizar a autenticação)
+	    UsuarioLogin usuarioLogin = new UsuarioLogin();
+	    usuarioLogin.setUsuario("maria_silva@email.com");
+	    usuarioLogin.setSenha("12345678");
+
+	    HttpEntity<UsuarioLogin> requisicao = new HttpEntity<>(usuarioLogin);
+
+	    ResponseEntity<UsuarioLogin> resposta = testRestTemplate
+	        .exchange(BASE_URL_USUARIOS + "/logar", HttpMethod.POST, requisicao, UsuarioLogin.class);
+
+	    // Then (validar o retorno)
+	    assertEquals(HttpStatus.OK, resposta.getStatusCode());
+	    assertNotNull(resposta.getBody().getToken());
+	    assertEquals("maria_silva@email.com", resposta.getBody().getUsuario());
+	}
+	
+	@Test
+	@DisplayName("Deve buscar um usuário por ID com sucesso")
+	public void deveBuscarUsuarioPorId() {
+
+	    // Given (Cadastra um usuário)
+	    Usuario usuario = usuarioService.cadastrarUsuario(
+	        TestBuilder.criarUsuario(null, "Roberto Carlos", "roberto@email.com", "12345678")
+	    ).get();
+
+	    // When (Realiza a busca pelo ID)
+	    ResponseEntity<Usuario> resposta = testRestTemplate
+	        .withBasicAuth(USUARIO_ROOT_EMAIL, USUARIO_ROOT_SENHA)
+	        .exchange(BASE_URL_USUARIOS + "/" + usuario.getId(), HttpMethod.GET, null, Usuario.class);
+
+	    // Then (Valida o retorno)
+	    assertEquals(HttpStatus.OK, resposta.getStatusCode());
+	    assertEquals("Roberto Carlos", resposta.getBody().getNome());
+	    assertEquals("roberto@email.com", resposta.getBody().getUsuario());
 	}
 
 }
